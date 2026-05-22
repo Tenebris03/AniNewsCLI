@@ -11,7 +11,7 @@ npm install -g aninewscli
 Or install directly from GitHub:
 
 ```bash
-npm install -g github.com/Tenebris03/AniNewsCLI
+npm install -g github:Tenebris03/AniNewsCLI
 ```
 
 ## Usage
