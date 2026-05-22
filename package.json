@@ -1,0 +1,28 @@
+{
+  "name": "aninewscli",
+  "version": "1.0.0",
+  "description": "CLI tool that displays anime episodes releasing today",
+  "main": "dist/index.js",
+  "bin": {
+    "aninews": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["anime", "cli", "schedule"],
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "cli-table3": "^0.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}
