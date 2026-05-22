@@ -31,3 +31,38 @@ export interface AniListResponse {
     };
   };
 }
+
+export interface CurrentlyAiringMedia {
+  id: number;
+  title: AnimeTitle;
+  format: string;
+  episodes: number | null;
+  nextAiringEpisode: {
+    episode: number;
+    airingAt: number;
+  } | null;
+  coverImage: {
+    medium: string;
+  };
+}
+
+export interface AiringMediaResponse {
+  data: {
+    Page: {
+      media: CurrentlyAiringMedia[];
+      pageInfo: {
+        hasNextPage: boolean;
+      };
+    };
+  };
+}
+
+export interface TrackedShow {
+  mediaId: number;
+  title: string;
+  addedAt: string;
+}
+
+export interface TrackedConfig {
+  tracked: Record<number, TrackedShow>;
+}

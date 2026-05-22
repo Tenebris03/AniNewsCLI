@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
-import { fetchSchedule } from "./api.js";
+import { fetchSchedule, fetchCurrentlyAiring } from "./api.js";
 import { displaySchedule } from "./display.js";
+import { runTrackingUI } from "./track.js";
 
 function showHelp(): void {
   console.log(`
@@ -13,6 +14,7 @@ function showHelp(): void {
     aninews tomorrow            Show tomorrow's releases
     aninews yesterday           Show yesterday's releases
     aninews DD.MM.YYYY          Show releases for a specific date
+    aninews track               Browse & track currently airing anime
     aninews --help              Show this help message
 
   ${chalk.bold("Examples:")}
@@ -20,6 +22,7 @@ function showHelp(): void {
     aninews tomorrow
     aninews yesterday
     aninews 25.12.2025
+    aninews track
 `);
 }
 
@@ -95,6 +98,22 @@ async function main() {
 
   if (args.includes("--help") || args.includes("-h")) {
     showHelp();
+    return;
+  }
+
+  if (args[0] === "track") {
+    console.log(chalk.dim("\n  Fetching currently airing anime..."));
+    try {
+      const media = await fetchCurrentlyAiring();
+      await runTrackingUI(media);
+    } catch (error) {
+      console.error(
+        chalk.red(
+          `\n  Failed to load tracking panel: ${(error as Error).message}\n`
+        )
+      );
+      process.exit(1);
+    }
     return;
   }
 
